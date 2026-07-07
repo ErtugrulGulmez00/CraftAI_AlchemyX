@@ -73,14 +73,11 @@ class _SettingsViewState extends State<SettingsView>
   Future<void> _launchURL(String urlString) async {
     final uri = Uri.parse(urlString);
     try {
-      if (await canLaunchUrl(uri)) {
-        await launchUrl(uri, mode: LaunchMode.externalApplication);
-      } else {
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Could not launch: $urlString')),
-          );
-        }
+      final launched = await launchUrl(uri, mode: LaunchMode.externalApplication);
+      if (!launched && mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Could not launch: $urlString')),
+        );
       }
     } catch (_) {
       if (mounted) {
