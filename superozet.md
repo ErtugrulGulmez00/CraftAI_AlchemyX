@@ -7,7 +7,7 @@
 Flutter ile yazılmış "Infinite Craft" tarzı sonsuz birleştirme oyunu.
 Oyuncu iki elementi birleştirir, yapay zekâ yeni bir element üretir.
 Paket adı `craftai`, görünen ad **CraftAI**, Android applicationId
-`com.mimecraft.mimecraft` (tarihsel; yayın öncesi son karar verilmeli).
+`com.craftai.game`.
 
 ## Mimari — 3 Aşamalı $0 Combine Hattı (`CombinationService`)
 1. **Hive local cache** (`LocalStorageService`) — anında, çevrimdışı çalışır.

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../core/constants/app_constants.dart';
 import '../core/constants/game_language.dart';
@@ -66,6 +67,27 @@ class _SettingsViewState extends State<SettingsView>
     } else {
       await NotificationService.disableDailyReminder();
       await settings.setDailyReminder(false);
+    }
+  }
+
+  Future<void> _launchURL(String urlString) async {
+    final uri = Uri.parse(urlString);
+    try {
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
+      } else {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Could not launch: $urlString')),
+          );
+        }
+      }
+    } catch (_) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Error launching link')),
+        );
+      }
     }
   }
 
@@ -212,6 +234,18 @@ class _SettingsViewState extends State<SettingsView>
                   title: t.aboutCraftAI,
                   accent: const Color(0xFF8B5CF6),
                   onTap: () => _showAbout(context, t),
+                ),
+                _NavRow(
+                  icon: Icons.privacy_tip_outlined,
+                  title: t.privacyPolicy,
+                  accent: const Color(0xFF3B82F6),
+                  onTap: () => _launchURL('https://ertugrulgulmez00.github.io/-craftai-legal/'),
+                ),
+                _NavRow(
+                  icon: Icons.apps,
+                  title: t.otherApps,
+                  accent: const Color(0xFFEC4899),
+                  onTap: () => _launchURL('https://play.google.com/store/apps/details?id=com.kitapayraciadana.ritim5'),
                 ),
               ],
             ),

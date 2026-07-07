@@ -166,6 +166,8 @@ class AppStringsData {
     required this.deleteConfirmAction,
     required this.accountDeleted,
     required this.accountDeleteFailed,
+    required this.privacyPolicy,
+    required this.otherApps,
   });
 
   // Login
@@ -362,6 +364,10 @@ class AppStringsData {
   final String deleteConfirmAction;
   final String accountDeleted;
   final String accountDeleteFailed;
+
+  // New fields for settings links
+  final String privacyPolicy;
+  final String otherApps;
 }
 
 final _en = AppStringsData(
@@ -544,6 +550,8 @@ final _en = AppStringsData(
   deleteConfirmAction: 'Delete',
   accountDeleted: 'Your account has been deleted.',
   accountDeleteFailed: 'Account deletion failed — please try again.',
+  privacyPolicy: 'Privacy Policy',
+  otherApps: 'Our Other Apps',
 );
 
 final _tr = AppStringsData(
@@ -730,6 +738,8 @@ final _tr = AppStringsData(
   deleteConfirmAction: 'Sil',
   accountDeleted: 'Hesabın silindi.',
   accountDeleteFailed: 'Hesap silinemedi — lütfen tekrar dene.',
+  privacyPolicy: 'Gizlilik Politikası',
+  otherApps: 'Diğer Uygulamalarımız',
 );
 
 final _de = AppStringsData(
@@ -920,6 +930,8 @@ final _de = AppStringsData(
   deleteConfirmAction: 'Löschen',
   accountDeleted: 'Dein Konto wurde gelöscht.',
   accountDeleteFailed: 'Kontolöschung fehlgeschlagen — bitte erneut versuchen.',
+  privacyPolicy: 'Datenschutzerklärung',
+  otherApps: 'Unsere anderen Apps',
 );
 
 final _es = AppStringsData(
@@ -1111,6 +1123,8 @@ final _es = AppStringsData(
   deleteConfirmAction: 'Eliminar',
   accountDeleted: 'Tu cuenta ha sido eliminada.',
   accountDeleteFailed: 'No se pudo eliminar la cuenta — inténtalo de nuevo.',
+  privacyPolicy: 'Política de privacidad',
+  otherApps: 'Nuestras otras aplicaciones',
 );
 
 final _pt = AppStringsData(
@@ -1297,6 +1311,8 @@ final _pt = AppStringsData(
   deleteConfirmAction: 'Excluir',
   accountDeleted: 'Sua conta foi excluída.',
   accountDeleteFailed: 'Falha ao excluir a conta — tente novamente.',
+  privacyPolicy: 'Política de privacidade',
+  otherApps: 'Nossos outros aplicativos',
 );
 
 /// Returns the string set for [language]. See [AppStringsData].
