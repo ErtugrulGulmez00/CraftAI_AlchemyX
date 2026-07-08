@@ -73,7 +73,7 @@ class _SplashViewState extends State<SplashView>
         MaterialPageRoute(
           builder: (_) => settings.hasSeenWelcome
               ? MainShell(remote: widget.remote)
-              : const OnboardingView(),
+              : OnboardingView(remote: widget.remote),
         ),
       );
     });

@@ -6,9 +6,11 @@ import 'package:provider/provider.dart';
 
 import '../core/constants/game_language.dart';
 import '../core/localization/app_strings.dart';
+import '../core/services/supabase_service.dart';
 import '../core/theme/app_theme.dart';
 import '../providers/auth_provider.dart';
 import '../providers/settings_provider.dart';
+import 'main_shell.dart';
 
 // Simple onboarding-only strings that don't need to go into AppStringsData.
 const _obLang = {
@@ -83,7 +85,9 @@ const _obModesHint = {
 /// Page 0 lets the user pick a language; all subsequent pages
 /// immediately render in that language.
 class OnboardingView extends StatefulWidget {
-  const OnboardingView({super.key});
+  const OnboardingView({super.key, required this.remote});
+
+  final SupabaseService remote;
 
   @override
   State<OnboardingView> createState() => _OnboardingViewState();
@@ -226,7 +230,7 @@ class _OnboardingViewState extends State<OnboardingView>
                       _WelcomePage(lang: lang, onNext: _next),
                       _HowToPlayPage(lang: lang, onNext: _next),
                       _ModesPage(lang: lang, onNext: _next),
-                      _LoginPage(lang: lang),
+                      _LoginPage(lang: lang, remote: widget.remote),
                     ],
                   ),
                 ),
@@ -657,8 +661,16 @@ class _ModeCard extends StatelessWidget {
 // Page 4 — Login (Google / Guest)
 // ────────────────────────────────────────────────────────────
 class _LoginPage extends StatelessWidget {
-  const _LoginPage({required this.lang});
+  const _LoginPage({required this.lang, required this.remote});
   final GameLanguage lang;
+  final SupabaseService remote;
+
+  void _enterApp(BuildContext context, SettingsProvider settings) {
+    settings.setSeenWelcome(true);
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (_) => MainShell(remote: remote)),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -695,7 +707,7 @@ class _LoginPage extends StatelessWidget {
             child: FilledButton.icon(
               onPressed: () async {
                 await auth.signInWithGoogle();
-                if (context.mounted) settings.setSeenWelcome(true);
+                if (context.mounted) _enterApp(context, settings);
               },
               icon: Container(
                 width: 24,
@@ -712,7 +724,7 @@ class _LoginPage extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           TextButton(
-            onPressed: () => settings.setSeenWelcome(true),
+            onPressed: () => _enterApp(context, settings),
             child: Text(t.continueAsGuest),
           ),
           const SizedBox(height: 28),
