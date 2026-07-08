@@ -33,13 +33,14 @@ class MyApp extends StatelessWidget {
       ],
       child: Builder(
         builder: (context) {
-          final settings = context.watch<SettingsProvider>();
           return MaterialApp(
             title: 'CraftAI',
             debugShowCheckedModeBanner: false,
-            theme: AppTheme.light,
+            // The game is dark-only by design — every screen is built on
+            // the cosmic starfield, so a light theme never fit.
+            theme: AppTheme.dark,
             darkTheme: AppTheme.dark,
-            themeMode: settings.mode,
+            themeMode: ThemeMode.dark,
             themeAnimationDuration: Duration.zero,
             home: SplashView(remote: remote),
           );

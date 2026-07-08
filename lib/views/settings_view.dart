@@ -73,17 +73,20 @@ class _SettingsViewState extends State<SettingsView>
   Future<void> _launchURL(String urlString) async {
     final uri = Uri.parse(urlString);
     try {
-      final launched = await launchUrl(uri, mode: LaunchMode.externalApplication);
+      final launched = await launchUrl(
+        uri,
+        mode: LaunchMode.externalApplication,
+      );
       if (!launched && mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Could not launch: $urlString')),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Could not launch: $urlString')));
       }
     } catch (_) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Error launching link')),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text('Error launching link')));
       }
     }
   }
@@ -123,14 +126,6 @@ class _SettingsViewState extends State<SettingsView>
           stag(
             _SettingsCard(
               rows: [
-                _SwitchRow(
-                  icon: Icons.dark_mode_outlined,
-                  title: t.darkMode,
-                  subtitle: t.darkModeSubtitle,
-                  accent: const Color(0xFF8B5CF6),
-                  value: settings.isDark,
-                  onChanged: settings.setDark,
-                ),
                 _SwitchRow(
                   icon: Icons.volume_up_outlined,
                   title: t.soundEffects,
@@ -236,13 +231,17 @@ class _SettingsViewState extends State<SettingsView>
                   icon: Icons.privacy_tip_outlined,
                   title: t.privacyPolicy,
                   accent: const Color(0xFF3B82F6),
-                  onTap: () => _launchURL('https://ertugrulgulmez00.github.io/-craftai-legal/'),
+                  onTap: () => _launchURL(
+                    'https://ertugrulgulmez00.github.io/-craftai-legal/',
+                  ),
                 ),
                 _NavRow(
                   icon: Icons.apps,
                   title: t.otherApps,
                   accent: const Color(0xFFEC4899),
-                  onTap: () => _launchURL('https://play.google.com/store/apps/details?id=com.kitapayraciadana.ritim5'),
+                  onTap: () => _launchURL(
+                    'https://play.google.com/store/apps/details?id=com.kitapayraciadana.ritim5',
+                  ),
                 ),
               ],
             ),
