@@ -126,13 +126,7 @@ class _SplashViewState extends State<SplashView>
                       opacity: _logoFade.value,
                       child: Transform.scale(
                         scale: _logoScale.value,
-                        // The real launcher icon artwork, so the native
-                        // splash → Flutter splash handoff is seamless.
-                        child: Image.asset(
-                          'assets/icon/app_icon_foreground.png',
-                          width: 220,
-                          height: 220,
-                        ),
+                        child: _SplashEmblem(glow: glow, morph: morph),
                       ),
                     ),
                     const SizedBox(height: 28),
